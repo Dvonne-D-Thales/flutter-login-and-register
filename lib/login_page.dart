@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:latihan_11pplg1/home_page.dart';
 import 'package:latihan_11pplg1/register_page.dart';
+import 'package:latihan_11pplg1/widgets/reusable_button.dart';
+import 'package:latihan_11pplg1/widgets/reusable_textfield.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,7 +12,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   
@@ -19,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   final String correctPassword = "123";
 
     void handleLogin() {
-    String email = emailController.text;
+    String email = usernameController.text;
     String password = passwordController.text;
 
     if (email == correctEmail && password == correctPassword) {
@@ -121,39 +123,48 @@ class _LoginPageState extends State<LoginPage> {
             ),
 
             Container(margin: EdgeInsets.only(top: 20, bottom: 20)),
-            SizedBox(height: 20),
-            TextField(
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: 'Username',
-                hintText: 'Enter your username',
-                border: OutlineInputBorder(),
-              ),
-            ),
+           const SizedBox(height: 30),
+                CustomTextField(
+                  label: "Name",
+                  isPassword: false,
+                  controller: usernameController,
+                ),
+
+            const SizedBox(height: 20),
+                CustomTextField(
+                  label: "Password",
+                  isPassword: true,
+                  controller: passwordController,
+                ),
 
             SizedBox(height: 20),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              keyboardType: TextInputType.visiblePassword,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                hintText: 'Enter your password',
-                border: OutlineInputBorder(),
-              ),
-            ),
-
-            SizedBox(height: 20),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  handleLogin();
-                },
-                child: Text('Login'),
-              ),
-            ),
-            Center(
+              
+                 Center(
+                    child: CostumButton(
+                    text: "Register",
+                    textColor: const Color.fromARGB(255, 0, 235, 70),
+                    onPressed: () {
+                      if (
+                          usernameController.text.isEmpty ||
+                          passwordController.text.isEmpty 
+                          ) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Please fill all fields"),
+                          ),
+                        );
+                      } else {
+                        // Handle registration logic here
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Registration successful!"),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  ) ,   
+              Center(
               child: TextButton(
                 onPressed: () {
                   Navigator.push(
@@ -164,6 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text('Register'),
               ),
             ),
+           
           ],
         ),
       ),
