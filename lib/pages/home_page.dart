@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Kalkulator Joseph")),
+      appBar: AppBar(title: const Text("Kalkulator Saya")),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => FootballPage(),
-                  ), // tanpa const
+                  ), 
                 );
               },
               child: const Text("Go to Football Page"),
