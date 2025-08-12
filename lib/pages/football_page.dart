@@ -60,7 +60,6 @@ class FootballPage extends StatelessWidget {
           ),
         ),
       ),
-      // backgroundColor default putih
     );
   }
 }
