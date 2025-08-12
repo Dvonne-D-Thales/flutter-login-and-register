@@ -33,13 +33,13 @@ class CustomDateField extends StatelessWidget {
         child: InputDecorator(
           decoration: InputDecoration(
             labelText: label,
-            border: OutlineInputBorder(),
+            border: const OutlineInputBorder(),
           ),
           child: Text(
             selectedDate != null
               ? "${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}"
               : "Pilih tanggal",
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
         ),
       ),
