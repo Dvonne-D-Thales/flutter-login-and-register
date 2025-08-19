@@ -1,83 +1,121 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:latihan_11pplg1/controllers/calculator_controller.dart';
-import 'package:latihan_11pplg1/widgets/reusable_textfield.dart';
-import 'package:latihan_11pplg1/widgets/reusable_button.dart';
+import 'package:flutter/services.dart';
 
 class CalculatorPages extends StatelessWidget {
   CalculatorPages({super.key});
 
-  final CalculatorController calculatorController = Get.put(
-    CalculatorController(),
-  );
+  final TextEditingController _angka1Controller = TextEditingController();
+  final TextEditingController _angka2Controller = TextEditingController();
+  final ValueNotifier<double> _hasil = ValueNotifier<double>(0);
+
+  void _hitung(BuildContext context, String operasi) {
+    double angka1 = double.tryParse(_angka1Controller.text) ?? 0;
+    double angka2 = double.tryParse(_angka2Controller.text) ?? 0;
+
+    if (operasi == '+') {
+      _hasil.value = angka1 + angka2;
+    } else if (operasi == '-') {
+      _hasil.value = angka1 - angka2;
+    } else if (operasi == 'x') {
+      _hasil.value = angka1 * angka2;
+    } else if (operasi == '/') {
+      if (angka2 != 0) {
+        _hasil.value = angka1 / angka2;
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("Request anda gak ngotak"),
+              content: const Text(
+                  "TOLONG JANGAN PAKE 0 UNTUK PEMBAGIAN, ANDA MEREPOTKAN SAYA !!!"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } else if (operasi == 'reset') {
+      _hasil.value = 0;
+      _angka1Controller.clear();
+      _angka2Controller.clear();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Kalkulator Joseph"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text("Kalkulator Joseph")),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomTextField(
-              controller: calculatorController.number1Controller,
-              label: 'Angka 1',
-              isPassword: false,
-            ),
-            const SizedBox(height: 10),
-            CustomTextField(
-              controller: calculatorController.number2Controller,
-              label: 'Angka 2',
-              isPassword: false,
+            ValueListenableBuilder<double>(
+              valueListenable: _hasil,
+              builder: (context, value, child) {
+                return Text(
+                  "Hasil: $value",
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
+                );
+              },
             ),
             const SizedBox(height: 20),
-
-            // Tombol baris pertama
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CostumButton(
-                  text: "+",
-                  textColor: Colors.black,
-                  onPressed: () => calculatorController.tambah(),
+                ElevatedButton(
+                  onPressed: () => _hitung(context, '+'),
+                  child: const Text("+"),
                 ),
-                CostumButton(
-                  text: "-",
-                  textColor: Colors.black,
-                  onPressed: () => calculatorController.kurang(),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () => _hitung(context, '-'),
+                  child: const Text("-"),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () => _hitung(context, 'x'),
+                  child: const Text("×"),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () => _hitung(context, '/'),
+                  child: const Text("/"),
                 ),
               ],
             ),
-            const SizedBox(height: 10),
-
-            // Tombol baris kedua
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CostumButton(
-                  text: "×",
-                  textColor: Colors.black,
-                  onPressed: () => calculatorController.kali(),
-                ),
-                CostumButton(
-                  text: "/",
-                  textColor: Colors.black,
-                  onPressed: () => calculatorController.bagi(),
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 30),
-            Obx(
-              () => Text(
-                'Hasil: ${calculatorController.result.value}',
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
+            const SizedBox(height: 20),
+            TextField(
+              controller: _angka1Controller,
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              decoration: const InputDecoration(
+                labelText: "Angka 1",
+                border: OutlineInputBorder(),
               ),
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: _angka2Controller,
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              decoration: const InputDecoration(
+                labelText: "Angka 2",
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => _hitung(context, 'reset'),
+              child: const Text("Reset"),
             ),
           ],
         ),

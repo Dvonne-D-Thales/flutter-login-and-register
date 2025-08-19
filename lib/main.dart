@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:latihan_11pplg1/controllers/bottom_nav_controller.dart';
 import 'package:latihan_11pplg1/routes/pages.dart';
 import 'package:latihan_11pplg1/routes/routes.dart';
 
