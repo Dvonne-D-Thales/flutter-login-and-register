@@ -15,7 +15,10 @@ class FootballPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Football Players", style: TextStyle(color: Colors.white)),
+        title: const Text(
+          "My Football Players",
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.deepPurple, // tetap agar konsisten
         elevation: 1,
       ),
@@ -89,10 +92,7 @@ class FootballPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  trailing: Icon(
-                    Icons.edit,
-                    color: const Color.fromARGB(255, 255, 255, 255), // aksen tipis ungu
-                  ),
+                  trailing: const Icon(Icons.edit, color: Colors.deepPurple),
                   onTap: () async {
                     final result = await Get.to<Player?>(
                       () => FootballEditPage(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:latihan_11pplg1/pages/home_page.dart';
-import 'package:latihan_11pplg1/register_page.dart';
+import 'package:latihan_11pplg1/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,12 +13,10 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  
-
   final String correctEmail = "admin";
   final String correctPassword = "123";
 
-    void handleLogin() {
+  void handleLogin() {
     String email = emailController.text;
     String password = passwordController.text;
 
@@ -65,22 +63,22 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       setState(() {
         showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("PEYUSUP!!!"),
-            content: Text("penyusup tidak dikenal, silahkan coba lagi"),
-             actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("PEYUSUP!!!"),
+              content: Text("penyusup tidak dikenal, silahkan coba lagi"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
       });
       showDialog(
         context: context,
@@ -158,7 +156,9 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const RegisterPage()),
+                    MaterialPageRoute(
+                      builder: (context) => const RegisterPage(),
+                    ),
                   );
                 },
                 child: Text('Register'),

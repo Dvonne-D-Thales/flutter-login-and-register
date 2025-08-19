@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'football_page.dart'; // Import halaman FootballPage untuk navigasi setelah simpan
+import 'football_page.dart';
 import '../models/player_model.dart';
 
 class FootballEditPage extends StatelessWidget {
-  // Data Player yang akan diedit dan callback saat simpan
   final Player player;
   final void Function(Player) onSave;
 
@@ -15,148 +14,68 @@ class FootballEditPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Controller untuk mengisi dan membaca input field dengan nilai awal player
     final nameController = TextEditingController(text: player.name);
     final posisiController = TextEditingController(text: player.posisi);
-    final nomorController =
-        TextEditingController(text: player.nomorPunggung.toString());
+    final nomorController = TextEditingController(
+      text: player.nomorPunggung.toString(),
+    );
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Pemain'),
-        backgroundColor: Colors.deepPurple, // Warna AppBar ungu gelap
-        elevation: 1, // Sedikit bayangan agar lebih tajam
+        backgroundColor: Colors.deepPurple,
       ),
-      backgroundColor: Colors.grey.shade100, // Warna latar belakang halaman
-      body: SingleChildScrollView(
-        // Agar konten bisa discroll jika layar kecil
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildTitle(), // Judul dan deskripsi halaman
-            const SizedBox(height: 32),
-            // Field input Nama
-            _buildTextField(
+            TextField(
               controller: nameController,
-              label: 'Nama',
-              icon: Icons.person,
+              decoration: const InputDecoration(labelText: 'Nama'),
             ),
-            const SizedBox(height: 20),
-            // Field input Posisi
-            _buildTextField(
+            const SizedBox(height: 12),
+            TextField(
               controller: posisiController,
-              label: 'Posisi',
-              icon: Icons.sports_soccer,
+              decoration: const InputDecoration(labelText: 'Posisi'),
             ),
-            const SizedBox(height: 20),
-            // Field input Nomor Punggung (angka)
-            _buildTextField(
+            const SizedBox(height: 12),
+            TextField(
               controller: nomorController,
-              label: 'Nomor Punggung',
-              icon: Icons.format_list_numbered,
               keyboardType: TextInputType.number,
+              decoration: const InputDecoration(labelText: 'Nomor Punggung'),
             ),
-            const SizedBox(height: 40),
-            // Tombol Simpan perubahan
-            _buildSaveButton(
-              onPressed: () {
-                // Buat objek Player baru dengan data terbaru dari input
-                final editedPlayer = Player(
-                  image: player.image, // tetap pakai image lama
-                  name: nameController.text,
-                  posisi: posisiController.text,
-                  nomorPunggung: int.tryParse(nomorController.text) ??
-                      player.nomorPunggung, // fallback jika input bukan angka
-                );
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              height: 45,
+              child: ElevatedButton(
+                onPressed: () {
+                  final editedPlayer = Player(
+                    image: player.image,
+                    name: nameController.text,
+                    posisi: posisiController.text,
+                    nomorPunggung:
+                        int.tryParse(nomorController.text) ??
+                        player.nomorPunggung,
+                  );
 
-                onSave(editedPlayer); // panggil callback onSave untuk update data
+                  onSave(editedPlayer);
 
-                // Navigasi ganti halaman ke FootballPage, hilangkan halaman edit dari stack
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => FootballPage()),
-                );
-              },
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (_) => FootballPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                ),
+                child: const Text(
+                  'Simpan',
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+              ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  // Widget untuk menampilkan judul dan deskripsi halaman
-  Widget _buildTitle() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Edit Data Pemain',
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Perbarui informasi pemain di bawah ini',
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.grey.shade700,
-          ),
-        ),
-      ],
-    );
-  }
-
-  // Widget untuk membuat TextField dengan ikon dan label
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    required IconData icon,
-    TextInputType? keyboardType,
-  }) {
-    return TextField(
-      controller: controller,
-      keyboardType: keyboardType ?? TextInputType.text,
-      decoration: InputDecoration(
-        labelText: label,
-        prefixIcon: Icon(icon, color: Colors.deepPurple.shade400), // ikon ungu soft
-        filled: true,
-        fillColor: Colors.white, // background putih untuk input
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.grey.shade300), // border abu muda
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.deepPurple.shade400, width: 2), // border ungu saat fokus
-        ),
-      ),
-    );
-  }
-
-  // Widget untuk tombol Simpan dengan style khusus
-  Widget _buildSaveButton({required VoidCallback onPressed}) {
-    return SizedBox(
-      width: double.infinity, // tombol penuh lebar layar
-      height: 50,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.deepPurple.shade400, // warna tombol ungu soft
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12), // rounded corners
-          ),
-          elevation: 3, // bayangan tombol
-        ),
-        onPressed: onPressed,
-        child: const Text(
-          'Simpan Perubahan',
-          style: TextStyle(
-            fontSize: 18,
-            color: Color.fromARGB(255, 255, 255, 255), // warna teks putih
-          ),
         ),
       ),
     );
