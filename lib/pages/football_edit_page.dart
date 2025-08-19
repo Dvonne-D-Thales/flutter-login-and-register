@@ -16,9 +16,8 @@ class FootballEditPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final nameController = TextEditingController(text: player.name);
     final posisiController = TextEditingController(text: player.posisi);
-    final nomorController = TextEditingController(
-      text: player.nomorPunggung.toString(),
-    );
+    final nomorController =
+        TextEditingController(text: player.nomorPunggung.toString());
 
     return Scaffold(
       appBar: AppBar(
@@ -55,8 +54,7 @@ class FootballEditPage extends StatelessWidget {
                     name: nameController.text,
                     posisi: posisiController.text,
                     nomorPunggung:
-                        int.tryParse(nomorController.text) ??
-                        player.nomorPunggung,
+                        int.tryParse(nomorController.text) ?? player.nomorPunggung,
                   );
 
                   onSave(editedPlayer);
@@ -69,10 +67,8 @@ class FootballEditPage extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple,
                 ),
-                child: const Text(
-                  'Simpan',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
+                child: const Text('Simpan',
+                    style: TextStyle(fontSize: 16, color: Colors.white)),
               ),
             ),
           ],

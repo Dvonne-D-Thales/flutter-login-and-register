@@ -15,10 +15,7 @@ class FootballPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "My Football Players",
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text("My Football Players", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.deepPurple, // tetap agar konsisten
         elevation: 1,
       ),
@@ -27,7 +24,7 @@ class FootballPage extends StatelessWidget {
         child: Obx(
           () => ListView.separated(
             itemCount: footballController.player.length,
-            separatorBuilder: (_, _) => const SizedBox(height: 12),
+            separatorBuilder: (_, _) => const SizedBox(height: 8),
             itemBuilder: (context, index) {
               final player = footballController.player[index];
 
@@ -92,7 +89,10 @@ class FootballPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  trailing: const Icon(Icons.edit, color: Colors.deepPurple),
+                  trailing: Icon(
+                    Icons.edit,
+                    color: const Color.fromARGB(255, 255, 255, 255), // aksen tipis ungu
+                  ),
                   onTap: () async {
                     final result = await Get.to<Player?>(
                       () => FootballEditPage(
@@ -112,7 +112,6 @@ class FootballPage extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: Colors.grey.shade100,
     );
   }
 }

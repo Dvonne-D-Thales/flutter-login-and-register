@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:latihan_11pplg1/widgets/reusable_button.dart';
 import 'package:latihan_11pplg1/widgets/reusable_textfield.dart';
 import 'package:latihan_11pplg1/widgets/datetime.dart';
 
@@ -60,25 +61,34 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                 ),
                 const SizedBox(height: 40),
-                ElevatedButton(
-                  onPressed: () {
-                    if (nameController.text.isEmpty ||
-                        usernameController.text.isEmpty ||
-                        passwordController.text.isEmpty ||
-                        birthDate == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Tolong lengkapi semua data!")),
-                      );
-                      return;
-                    }
-                    // Handle registration logic here
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Registration successful!")),
-                    );
-                    Navigator.pop(context);
-                  },
-                  child: const Text("Register"),
-                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 50),
+                  child: Center(
+                    child: CostumButton(
+                    text: "Register",
+                    textColor: const Color.fromARGB(255, 0, 235, 70),
+                    onPressed: () {
+                      if (nameController.text.isEmpty ||
+                          usernameController.text.isEmpty ||
+                          passwordController.text.isEmpty ||
+                          birthDate == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Please fill all fields"),
+                          ),
+                        );
+                      } else {
+                        // Handle registration logic here
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Registration successful!"),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  ) 
+                )
               ],
             ),
           ),
