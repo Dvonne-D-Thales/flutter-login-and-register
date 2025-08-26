@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
-import 'football_page.dart';
-import '../models/player_model.dart';
+import 'package:get/get.dart';
+import 'package:latihan_11pplg1/routes/routes.dart';
+import '../controllers/football_edit_controller.dart';
+import '../widgets/reusable_textfield.dart';
+import '../widgets/reusable_button.dart';
 
 class FootballEditPage extends StatelessWidget {
-  final Player player;
-  final void Function(Player) onSave;
+  FootballEditPage({super.key});
 
-  const FootballEditPage({
-    super.key,
-    required this.player,
-    required this.onSave,
-  });
+  final editController = Get.put(FootballEditController());
 
   @override
   Widget build(BuildContext context) {
-    final nameController = TextEditingController(text: player.name);
-    final posisiController = TextEditingController(text: player.posisi);
-    final nomorController =
-        TextEditingController(text: player.nomorPunggung.toString());
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Pemain'),
@@ -28,47 +21,35 @@ class FootballEditPage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(
-              controller: nameController,
-              decoration: const InputDecoration(labelText: 'Nama'),
+            CustomTextField(
+              controller: editController.nameController,
+              label: 'Nama',
+              isPassword: false,
             ),
             const SizedBox(height: 12),
-            TextField(
-              controller: posisiController,
-              decoration: const InputDecoration(labelText: 'Posisi'),
+            CustomTextField(
+              controller: editController.posisiController,
+              label: 'Posisi',
+              isPassword: false,
             ),
             const SizedBox(height: 12),
-            TextField(
-              controller: nomorController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Nomor Punggung'),
+            CustomTextField(
+              controller: editController.nomorController,
+              label: 'Nomor Punggung',
+              isPassword: false,
+              // keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 24),
             SizedBox(
               width: double.infinity,
               height: 45,
-              child: ElevatedButton(
+              child: CostumButton(
+                text: 'Simpan',
+                textColor: Colors.white,
                 onPressed: () {
-                  final editedPlayer = Player(
-                    image: player.image,
-                    name: nameController.text,
-                    posisi: posisiController.text,
-                    nomorPunggung:
-                        int.tryParse(nomorController.text) ?? player.nomorPunggung,
-                  );
-
-                  onSave(editedPlayer);
-
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (_) => FootballPage()),
-                  );
+                  editController.updatePlayer();
+                  Get.back();
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
-                ),
-                child: const Text('Simpan',
-                    style: TextStyle(fontSize: 16, color: Colors.white)),
               ),
             ),
           ],

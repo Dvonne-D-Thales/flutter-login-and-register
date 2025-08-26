@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:latihan_11pplg1/routes/routes.dart';
 import 'football_edit_page.dart';
 import '../controllers/football_controller.dart' as controller;
-import '../models/player_model.dart';
 
 class FootballPage extends StatelessWidget {
   final controller.FootballController footballController = Get.put(
@@ -15,7 +15,10 @@ class FootballPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Football Players", style: TextStyle(color: Colors.white)),
+        title: const Text(
+          "My Football Players",
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.deepPurple, // tetap agar konsisten
         elevation: 1,
       ),
@@ -91,20 +94,15 @@ class FootballPage extends StatelessWidget {
                   ),
                   trailing: Icon(
                     Icons.edit,
-                    color: const Color.fromARGB(255, 255, 255, 255), // aksen tipis ungu
+                    color: const Color.fromARGB(
+                      255,
+                      255,
+                      255,
+                      255,
+                    ), // aksen tipis ungu
                   ),
-                  onTap: () async {
-                    final result = await Get.to<Player?>(
-                      () => FootballEditPage(
-                        player: player,
-                        onSave: (editedPlayer) {
-                          Get.back(result: editedPlayer);
-                        },
-                      ),
-                    );
-                    if (result != null) {
-                      footballController.player[index] = result;
-                    }
+                  onTap: () {
+                    Get.toNamed(AppRoutes.footballeditpage, arguments: index);
                   },
                 ),
               );
