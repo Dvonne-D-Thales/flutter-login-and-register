@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../pages/login_page.dart';
 
 class ProfilFragmen extends StatelessWidget {
   const ProfilFragmen({super.key});
@@ -8,12 +10,32 @@ class ProfilFragmen extends StatelessWidget {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Icon(Icons.person, size: 80, color: Colors.deepPurple),
-          SizedBox(height: 16),
-          Text('Selamat Datang di Profil!', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-          SizedBox(height: 8),
-          Text('Ini adalah halaman data pengguna', style: TextStyle(fontSize: 16)),
+        children: [
+          CircleAvatar(
+            radius: 50,
+            backgroundImage: NetworkImage("https://i.pravatar.cc/300"),
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            "John Doe",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          const Text(
+            "johndoe@example.com",
+            style: TextStyle(color: Colors.grey),
+          ),
+          const SizedBox(height: 24),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.deepPurple,
+              foregroundColor: Colors.white,
+            ),
+            onPressed: () {
+              Get.offAll(() => LoginPage());
+            },
+            icon: const Icon(Icons.logout),
+            label: const Text("Logout"),
+          ),
         ],
       ),
     );

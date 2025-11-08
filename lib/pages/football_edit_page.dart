@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:latihan_11pplg1/routes/routes.dart';
 import '../controllers/football_edit_controller.dart';
 import '../widgets/reusable_textfield.dart';
 import '../widgets/reusable_button.dart';
@@ -49,7 +48,7 @@ class FootballEditPage extends StatelessWidget {
                 onPressed: () {
                   editController.updatePlayer();
                   Get.back();
-                },
+                }, backgroundColor: Colors.blueAccent, borderRadius: 12,
               ),
             ),
           ],

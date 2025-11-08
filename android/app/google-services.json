@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "96921531125",
+    "project_id": "messeging-fa5af",
+    "storage_bucket": "messeging-fa5af.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96921531125:android:0b1342dbf9f6bb19b58bbc",
+        "android_client_info": {
+          "package_name": "com.example.latihan_11pplg1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "96921531125-p23f9mj30eniu4rp7apqc9cab9lbrk7v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.latihan_11pplg1",
+            "certificate_hash": "74243a14295a33865c267de15529ccff08176c48"
+          }
+        },
+        {
+          "client_id": "96921531125-k569fhjvgd4lgkf72t3b05blbuf5e9cn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDblgZhM6_gHYMaxTTxKS4-oVu878adf2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "96921531125-k569fhjvgd4lgkf72t3b05blbuf5e9cn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

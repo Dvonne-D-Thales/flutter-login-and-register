@@ -7,16 +7,17 @@ class CalculatorController extends GetxController {
   var result = "".obs;
 
   void tambah() {
-   int number1 = int.parse(number1Controller.text.toString());
-    int number2 = int.parse(number2Controller.text.toString());
-   
-   int hasilJumlah = number1 + number2;
-    result.value = "Hasil Penjumlahan: $hasilJumlah";
-  }
-  void kurang () {
     int number1 = int.parse(number1Controller.text.toString());
     int number2 = int.parse(number2Controller.text.toString());
-    
+
+    int hasilJumlah = number1 + number2;
+    result.value = "Hasil Penjumlahan: $hasilJumlah";
+  }
+
+  void kurang() {
+    int number1 = int.parse(number1Controller.text.toString());
+    int number2 = int.parse(number2Controller.text.toString());
+
     int hasilPengurangan = number1 - number2;
     result.value = "Hasil Pengurangan: $hasilPengurangan";
   }
@@ -24,7 +25,7 @@ class CalculatorController extends GetxController {
   void kali() {
     int number1 = int.parse(number1Controller.text.toString());
     int number2 = int.parse(number2Controller.text.toString());
-    
+
     int hasilPerkalian = number1 * number2;
     result.value = "Hasil Perkalian: $hasilPerkalian";
   }
@@ -32,7 +33,7 @@ class CalculatorController extends GetxController {
   void bagi() {
     int number1 = int.parse(number1Controller.text.toString());
     int number2 = int.parse(number2Controller.text.toString());
-    
+
     if (number2 != 0) {
       double hasilPembagian = number1 / number2;
       result.value = "Hasil Pembagian: $hasilPembagian";

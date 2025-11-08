@@ -85,7 +85,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         );
                       }
-                    },
+                    }, backgroundColor: Colors.purple, 
+                    borderRadius: 12,
                   ),
                   ) 
                 )

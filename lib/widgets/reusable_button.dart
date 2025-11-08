@@ -7,7 +7,7 @@ class CostumButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
   const CostumButton({super.key, required this.text,
-   required this.textColor, this.onPressed});
+   required this.textColor, this.onPressed, Color? color, required Color backgroundColor, required int borderRadius});
 
   @override
   Widget build(BuildContext context) {

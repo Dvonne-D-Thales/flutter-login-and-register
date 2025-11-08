@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:latihan_11pplg1/pages/login_page.dart';
+import 'package:get/get.dart';
+import 'package:latihan_11pplg1/widgets/reusable_button.dart';
+import '../controllers/login_api_controller.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginApiController());
+
     return Scaffold(
       appBar: AppBar(title: const Text("Profile")),
       body: Center(
@@ -26,19 +30,16 @@ class ProfilePage extends StatelessWidget {
               style: TextStyle(color: Colors.grey),
             ),
             const SizedBox(height: 24),
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurple,
-                foregroundColor: Colors.white,
+            SizedBox(
+              width: 160,
+              height: 45,
+              child: CostumButton(
+                text: "Logout",
+                textColor: Colors.white,
+                onPressed: controller.logout, // panggil logout dari controller
+                backgroundColor: Colors.redAccent, 
+                borderRadius: 12, 
               ),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
-              },
-              icon: const Icon(Icons.logout),
-              label: const Text("Logout"),
             ),
           ],
         ),
